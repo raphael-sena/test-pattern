@@ -21,8 +21,12 @@ describe('CheckoutService', () => {
             // Act
             const pedido = await service.processarPedido(carrinho, cartaoCredito);
 
-            // Assert
+            // Assert - Verificação de Estado
             expect(pedido).toBeNull();
+
+            // Dummies não devem ter sido acionados
+            expect(repositoryDummy.salvar).not.toHaveBeenCalled();
+            expect(emailDummy.enviarEmail).not.toHaveBeenCalled();
         });
     });
 
